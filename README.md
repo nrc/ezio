@@ -1,4 +1,4 @@
-# EZIO - a crate for easy IO
+# ezio - a crate for easy IO
 
 ## Examples
 
@@ -29,12 +29,12 @@ fn main() {
 
 ## Design principals
 
-(Ezio is work in progress, so these may still be aspirational)
+(ezio is work in progress, so these may still be aspirational)
 
 * Easy to use!
 * Complete prelude
 * Simple module hierarchy
-* String-based, not byte based by default
+* String-based, not byte-based by default
 * Panic-happy: panic by default, `try_` versions of functions where you really need an error
 * Allocation-happy: returns Strings, etc rather than taking buffers
 * Compatible and interoperable with std IO so programs can gradually migrate from ezio to std::io

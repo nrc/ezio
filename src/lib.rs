@@ -19,6 +19,33 @@
 //!
 //! ezio has its own `Read` and `Write` traits which you can use for generic
 //! programming. These are defined in the [`read`] and [`write`] modules, respectively.
+//!
+//! ## Examples
+//!
+//! ```
+//! use ezio::prelude::*;
+//!
+//! fn main() {
+//!     // Read a line from stdin
+//!     let _ = stdio::read_line();
+//!
+//!     // Iterate lines in a file
+//!     for line in file::reader("path/to/file.txt") {
+//!         // ...
+//!     }
+//!
+//!     // Read a while file
+//!     let _ = file::read("path/to/file.txt");
+//!
+//!     // Write to a file
+//!     file::write("path/to/file.txt", "Some text");
+//!
+//!     // Write multiple things to a file
+//!     let mut w = file::writer("path/to/file.txt");
+//!     w.write("Some text\n");
+//!     w.write("Some more text");
+//! }
+//! ```
 
 /// Re-exports of ezio's modules, traits, and some functions and types.
 ///
