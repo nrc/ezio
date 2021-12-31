@@ -41,12 +41,3 @@ fn main() {
 * Just because we're doing unsophisticated IO, doesn't mean the rest of the program is unsophisticated. Therefore:
   - should be idiomatic Rust
   - should support generics and trait objects, etc
-  - 
-
-# TODO
-
-* & impls
-* docs
-* impl BufRead
-* scan macros
-
