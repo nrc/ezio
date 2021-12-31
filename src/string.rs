@@ -8,7 +8,9 @@ pub fn writer() -> Writer {
     Writer(String::new())
 }
 
+#[derive(Clone, Debug)]
 pub struct Reader<'a>(&'a str);
+#[derive(Clone, Debug)]
 pub struct Writer(String);
 
 impl Into<String> for Writer {
@@ -108,6 +110,15 @@ mod test {
     }
 
     #[test]
+    fn str_write_any() {
+        let mut writer = writer();
+        writer.write_any("Hello ");
+        writer.write_any(42);
+        writer.write_any(String::new());
+        assert_eq!(writer.as_ref(), "Hello 42");
+    }
+
+    #[test]
     fn str_read() {
         let mut reader = reader("line 1\n line 2");
         assert_eq!(reader.read_all(), "line 1\n line 2");
@@ -116,6 +127,14 @@ mod test {
 
         let mut reader: Reader = "".into();
         assert_eq!(reader.read_line(), "");
+    }
+
+    #[test]
+    fn str_read_any() {
+        let mut reader = reader("line 1\n42\n3.14");
+        assert_eq!(&reader.read_line_any::<String>(), "line 1");
+        assert_eq!(reader.read_line_any::<u8>(), 42);
+        assert_eq!(reader.read_line_any::<f64>(), 3.14);
     }
 
     #[test]

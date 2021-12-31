@@ -1,3 +1,32 @@
+//! ezio - an easy IO library for Rust
+//!
+//! ezio offers an easy to use IO API for reading and writing to files and stdio.
+//! Performance and idiomatic error handling are explicit non-goals, so ezio is
+//! probably not suitable for production use. It is better suited for education,
+//! experimentation, and prototyping.
+//!
+//! ezio wraps the standard library's IO APIs and is designed to interoperate with
+//! them, so ezio should be compatible with most upstream libraries.
+//!
+//! The easiest way to use ezio is to include the prelude:
+//!
+//! ```
+//! use ezio::prelude::*;
+//! ```
+//!
+//! You can then either use reader and writer objects, or read/write free functions,
+//! each are defined in the modules for specific IO kinds.
+//!
+//! ezio has its own `Read` and `Write` traits which you can use for generic
+//! programming. These are defined in the [`read`] and [`write`] modules, respectively.
+
+/// Re-exports of ezio's modules, traits, and some functions and types.
+///
+/// Import using:
+///
+/// ```
+/// use ezio::prelude::*;
+/// ```
 pub mod prelude {
     pub use super::{
         file,
@@ -8,15 +37,28 @@ pub mod prelude {
     };
 }
 
+/// Defines ezio's `Read` trait and iterators for reading.
 #[macro_use]
 mod read;
 
+/// Defines ezio's `Write` trait.
 mod write {
     pub trait Write: std::io::Write {
         fn write(&mut self, s: &str);
+
+        fn write_any(&mut self, o: impl ToString)
+        where
+            Self: Sized,
+        {
+            <Self as Write>::write(self, &o.to_string())
+        }
     }
 }
 
+/// File IO.
 pub mod file;
+/// IO using stdin, stdout, and stderr. Used for terminal IO, etc.
 pub mod stdio;
+/// Implementation of ezio traits for strings. Useful for mocking and other
+/// test usage of ezio in tests.
 pub mod string;

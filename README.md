@@ -45,9 +45,8 @@ fn main() {
 
 # TODO
 
-* parsing read
-* iter methods
 * & impls
 * docs
 * impl BufRead
-* read/scan w/ parsing macros
+* scan macros
+

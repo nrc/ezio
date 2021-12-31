@@ -20,10 +20,13 @@ pub fn stdin() -> Stdin {
     Stdin(std::io::stdin())
 }
 
+#[derive(Debug)]
 pub struct Stdout(std::io::Stdout);
 
+#[derive(Debug)]
 pub struct Stderr(std::io::Stderr);
 
+#[derive(Debug)]
 pub struct Stdin(std::io::Stdin);
 
 impl Write for Stdout {

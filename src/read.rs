@@ -1,6 +1,19 @@
+use std::str::FromStr;
+
 pub trait Read: IntoIterator + std::io::Read {
     fn read_all(&mut self) -> String;
+
     fn read_line(&mut self) -> String;
+
+    fn read_line_any<T: FromStr>(&mut self) -> T
+    where
+        Self: Sized,
+    {
+        match self.read_line().parse() {
+            Ok(t) => t,
+            Err(_) => panic!("Could not parse string"),
+        }
+    }
 }
 
 macro_rules! read_into_iter {
