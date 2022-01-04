@@ -17,12 +17,12 @@
 //! You can then either use reader and writer objects, or read/write free functions,
 //! each are defined in the modules for specific IO kinds.
 //!
-//! ezio has its own `Read` and `Write` traits which you can use for generic
-//! programming. These are defined in the [`read`] and [`write`] modules, respectively.
+//! ezio has its own [`Read`] and [`Write`] traits which you can use for generic
+//! programming.
 //!
 //! ## Examples
 //!
-//! ```
+//! ```no_run
 //! use ezio::prelude::*;
 //!
 //! fn main() {
@@ -64,15 +64,27 @@ pub mod prelude {
     };
 }
 
+pub use read::Read;
+pub use write::Write;
+
 /// Defines ezio's `Read` trait and iterators for reading.
 #[macro_use]
 mod read;
 
 /// Defines ezio's `Write` trait.
 mod write {
+    /// A trait for objects which can write out data.
     pub trait Write: std::io::Write {
+        /// Write a string to self.
+        ///
+        /// How the string is written will depend on the implementation.
+        ///
+        /// Panics if the string cannot be written.
         fn write(&mut self, s: &str);
 
+        /// Write any data which implements `ToString` to self.
+        ///
+        /// Panics if the string cannot be written.
         fn write_any(&mut self, o: impl ToString)
         where
             Self: Sized,

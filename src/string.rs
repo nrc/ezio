@@ -1,15 +1,31 @@
 use crate::prelude::*;
 
+/// Create a string [`Reader`] from a string.
 pub fn reader(s: &str) -> Reader<'_> {
     Reader(s)
 }
 
+/// Create an empty string [`Writer`].
 pub fn writer() -> Writer {
     Writer(String::new())
 }
 
+/// A reader for reading from a string (`&str`).
+///
+/// Implements the `Read` trait, so this is a way to integrate strings into ezio's trait system.
+/// Primarily designed for testing and other experimentation where proper IO is mocked with string
+/// data.
 #[derive(Clone, Debug)]
 pub struct Reader<'a>(&'a str);
+
+/// A writer for writing into a string (`String`).
+///
+/// Implements the `Write` trait, so this is a way to integrate strings into ezio's trait system.
+/// Primarily designed for testing and other experimentation where proper IO is mocked with string
+/// data.
+///
+/// To access the written string data, convert into a `String` using `into()`, or get a reference
+/// using `as_ref()`.
 #[derive(Clone, Debug)]
 pub struct Writer(String);
 
@@ -77,6 +93,7 @@ impl<'a> std::io::Read for Reader<'a> {
     }
 }
 
+/// An iterator for reading lines from a string [`Reader`].
 pub struct StrIterReader<'a>(std::str::Lines<'a>);
 
 impl<'a> IntoIterator for Reader<'a> {

@@ -1,25 +1,56 @@
 use crate::prelude::*;
 use std::path::Path;
 
+/// Create an object to read from a file.
+///
+/// The `path` argument specifies the path to the file to read from. It may be
+/// either a `Path`, a string, or any other type that can be converted (using
+/// `AsRef`) to a `Path`. The file must already exist.
+///
+/// Panics if there is no file at `path`, or the file cannot be opened.
 pub fn reader(path: impl AsRef<Path>) -> Reader {
     Reader(std::io::BufReader::new(
         std::fs::File::open(path).expect("Couldn't open file"),
     ))
 }
 
+/// Create an object to write to a file.
+///
+/// The `path` argument specifies the path to the file to write to. It may be
+/// either a `Path`, a string, or any other type that can be converted (using
+/// `AsRef`) to a `Path`. If the file does not exist, it will be created.
+///
+/// Panics if the file cannot be opened or created.
 pub fn writer(path: impl AsRef<Path>) -> Writer {
     Writer(std::fs::File::create(path).expect("Couldn't create file"))
 }
 
+/// Read and return a whole file.
+///
+/// The `path` argument specifies the path to the file to read from. It may be
+/// either a `Path`, a string, or any other type that can be converted (using
+/// `AsRef`) to a `Path`. The file must already exist.
+///
+/// Panics if there is no file at `path`, or the file cannot be opened.
 pub fn read(path: impl AsRef<Path>) -> String {
     reader(path).read_all()
 }
 
+/// Write a string to a file.
+///
+/// The `path` argument specifies the path to the file to write to. It may be
+/// either a `Path`, a string, or any other type that can be converted (using
+/// `AsRef`) to a `Path`. If the file does not exist, it will be created.
+///
+/// Panics if the file cannot be opened or created.
 pub fn write(path: impl AsRef<Path>, s: &str) {
     writer(path).write(s)
 }
 
+/// An object for writing to a file.
 pub struct Writer(std::fs::File);
+
+/// An object for reading from a file.
 pub struct Reader(std::io::BufReader<std::fs::File>);
 
 impl Write for Writer {

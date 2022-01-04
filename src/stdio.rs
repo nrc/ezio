@@ -1,31 +1,44 @@
 use crate::prelude::*;
 
+/// Read a single line from stdin.
 pub fn read_line() -> String {
     stdin().read_line()
 }
 
+/// Print a string to stdout.
 pub fn print(s: &str) {
     stdout().write(s)
 }
 
+/// Print a string to stderr.
+pub fn eprint(s: &str) {
+    stderr().write(s)
+}
+
+/// Get a handle to stdout.
 pub fn stdout() -> Stdout {
     Stdout(std::io::stdout())
 }
 
+/// Get a handle to stderr.
 pub fn stderr() -> Stderr {
     Stderr(std::io::stderr())
 }
 
+/// Get a handle to stdin.
 pub fn stdin() -> Stdin {
     Stdin(std::io::stdin())
 }
 
+/// A handle to stdout.
 #[derive(Debug)]
 pub struct Stdout(std::io::Stdout);
 
+/// A handle to stderr.
 #[derive(Debug)]
 pub struct Stderr(std::io::Stderr);
 
+/// A handle to stdin.
 #[derive(Debug)]
 pub struct Stdin(std::io::Stdin);
 
