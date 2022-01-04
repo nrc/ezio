@@ -14,7 +14,7 @@ fn main() {
         // ...
     }
 
-    // Read a while file
+    // Read a whole file
     let _ = file::read("path/to/file.txt");
 
     // Write to a file
