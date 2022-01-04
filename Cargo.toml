@@ -2,7 +2,11 @@
 name = "ezio"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Nicholas Cameron <nrc@ncameron.org>"]
+description = "A crate for really easy IO."
+repository = "https://github.com/nrc/ezio"
+license = "Apache-2.0"
+keywords = ["IO", "stdio", "file", "read", "write"]
+categories = ["filesystem", "os"]
 
 [dependencies]
