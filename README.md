@@ -32,7 +32,7 @@ fn main() {
 (ezio is work in progress, so these may still be aspirational)
 
 * Easy to use!
-* Complete prelude
+* Easy to import - provide a prelude and most users will not need anything else
 * Simple module hierarchy
 * String-based, not byte-based by default
 * Panic-happy: panic by default, `try_` versions of functions where you really need an error
