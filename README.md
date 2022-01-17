@@ -1,5 +1,14 @@
 # ezio - a crate for easy IO
 
+ezio offers an easy to use IO API for reading and writing to files and stdio.
+ezio includes utilities for generating random numbers and other IO-like functionality.
+Performance and idiomatic error handling are explicit non-goals, so ezio is
+probably not suitable for production use. It is better suited for education,
+experimentation, and prototyping.
+
+ezio wraps the standard library's IO APIs and other well-established crates, and is designed
+to interoperate with them, so ezio should be compatible with most upstream libraries.
+
 ## Examples
 
 ```rust
@@ -24,6 +33,9 @@ fn main() {
     let mut w = file::writer("path/to/file.txt");
     w.write("Some text\n");
     w.write("Some more text");
+
+    // Generates a random u32
+    let _ = random::u32();
 }
 ```
 

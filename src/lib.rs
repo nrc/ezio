@@ -1,12 +1,13 @@
 //! ezio - an easy IO library for Rust
 //!
 //! ezio offers an easy to use IO API for reading and writing to files and stdio.
+//! ezio includes utilities for generating random numbers and other IO-like functionality.
 //! Performance and idiomatic error handling are explicit non-goals, so ezio is
 //! probably not suitable for production use. It is better suited for education,
 //! experimentation, and prototyping.
 //!
-//! ezio wraps the standard library's IO APIs and is designed to interoperate with
-//! them, so ezio should be compatible with most upstream libraries.
+//! ezio wraps the standard library's IO APIs and other well-established crates, and is designed
+//! to interoperate with them, so ezio should be compatible with most upstream libraries.
 //!
 //! The easiest way to use ezio is to include the prelude:
 //!
@@ -44,6 +45,9 @@
 //!     let mut w = file::writer("path/to/file.txt");
 //!     w.write("Some text\n");
 //!     w.write("Some more text");
+//!
+//!     // Generates a random u32
+//!     let _ = random::u32();
 //! }
 //! ```
 
@@ -56,7 +60,7 @@
 /// ```
 pub mod prelude {
     pub use super::{
-        file,
+        file, random,
         read::Read,
         stdio::{self, stderr, stdin, stdout, Stderr, Stdin, Stdout},
         string,
@@ -96,6 +100,8 @@ mod write {
 
 /// File IO.
 pub mod file;
+/// Generate random numbers (and bools) using the rand crate.
+pub mod random;
 /// IO using stdin, stdout, and stderr. Used for terminal IO, etc.
 pub mod stdio;
 /// Implementation of ezio traits for strings. Useful for mocking and other
