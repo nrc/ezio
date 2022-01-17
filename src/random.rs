@@ -10,7 +10,7 @@ macro_rules! rand_fns {
             random()
         }
 
-        /// Generate a random floating point number between 0 and `upper_bound`
+        /// Generate a random integer between 0 and `upper_bound`
         /// from a uniform distribution.
         ///
         /// `upper_bound` is exclusive so will never be returned.
@@ -25,7 +25,7 @@ macro_rules! rand_fns {
 
 macro_rules! frand_fns {
     ($name: ident, $max_name: ident) => {
-        /// Generate a random integer from a uniform distribution.
+        /// Generate a random floating point number from a uniform distribution.
         ///
         /// Implemented using the [rand](https://docs.rs/rand) crate, see their
         /// docs for more information.
